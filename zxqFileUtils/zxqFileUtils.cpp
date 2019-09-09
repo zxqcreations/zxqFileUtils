@@ -50,6 +50,68 @@ void readBMP(const char* fileName) {
 	std::cout  << info.biSize << " " << info.biClrImportant;
 }
 
+void readJPEG() {
+	std::ifstream file("C:/Users/xueqianz/Desktop/workspace/CppProjects/bmp_files/24_bit_color.jpg", std::ios::binary);
+	const char JPEG_SOI = 0xd8;
+	const char JPEG_APP0 = 0xe0;
+	const char JPEG_DQT = 0xdb;
+	const char JPEG_SOF0 = 0xc0;
+	const char JPEG_DHT = 0xc4;
+	const char JPEG_DRI = 0xdd;
+	const char JPEG_SOS = 0xda;
+	const char JPEG_EOI = 0xd9;
+	typedef struct zJPEGAPP0INFO {
+		unsigned short jaSize;
+		unsigned short flagBits1;
+		unsigned short flagBits2;
+		unsigned short restFlagBits_versionLowBits;
+		unsigned short versionHighBits_density;
+		unsigned short xDensity;
+		unsigned short yDensity;
+		unsigned short thumbDensity;
+	} JPEGAPP0INFO;
+	typedef struct zJPEGAPPnINFO {
+		unsigned short jaSize;
+	} JPEGAPPnINFO;
+
+	bool isFlag = false;
+	char item;
+	while (!file.eof()) {
+		file.read(&item, sizeof(char));
+		if (item == 0xff) {
+			isFlag = true;
+			continue;
+		}
+		if (isFlag) {
+			switch (item)
+			{
+			case JPEG_SOI:
+				break;
+			case JPEG_DQT:
+				break;
+			case JPEG_SOF0:
+				break;
+			case JPEG_DHT:
+				break;
+			case JPEG_DRI:
+				break;
+			case JPEG_SOS:
+				break;
+			case JPEG_EOI:
+				break;
+			default:
+				if (item > 0xe0 && item <= 0xef) {
+
+				}
+				else {
+
+				}
+				break;
+			}
+		}
+	}
+}
+
 const char* readFile(const char* fileName) {
 	std::ifstream file(fileName);
 	char* content;
