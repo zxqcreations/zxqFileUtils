@@ -134,7 +134,7 @@ void readJPEG() {
 				break;
 			default:
 				if (item >= JPEG_APP1 && item <= JPEG_APP15) {
-
+					std::cout << "APP" << item << std::endl;
 				}
 				else if(item == 0x00) {
 
